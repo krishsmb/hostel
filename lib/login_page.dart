@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final loginButton = Builder(
-        builder: (context) => Padding(
+        builder: (context) => Padding( 
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Material(
                 borderRadius: BorderRadius.circular(30.0),

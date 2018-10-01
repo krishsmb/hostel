@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hostel/home_page.dart';
+import 'package:hostel/dash_board.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -8,7 +9,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailControler = TextEditingController();
+  final userControler = TextEditingController();
   final passwordControler = TextEditingController();
 
   @override
@@ -18,17 +19,20 @@ class _LoginPageState extends State<LoginPage> {
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 48.0,
-        child: Image.asset('assets/logo.png'),
+        child: new Icon(
+          Icons.hotel,
+          size: 80.0,
+          color: Colors.lightBlueAccent,
+        ),
       ),
     );
 
-    final email = TextFormField(
-      keyboardType: TextInputType.emailAddress,
+    final user = TextFormField(
       autofocus: false,
-      controller: emailControler,
+      controller: userControler,
       // initialValue: 'alucard@gmail.com',
       decoration: InputDecoration(
-        hintText: 'Email',
+        hintText: 'Username',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
@@ -48,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final loginButton = Builder(
-        builder: (context) => Padding( 
+        builder: (context) => Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Material(
                 borderRadius: BorderRadius.circular(30.0),
@@ -59,12 +63,14 @@ class _LoginPageState extends State<LoginPage> {
                   minWidth: 200.0,
                   height: 42.0,
                   onPressed: () {
-                    if (emailControler.text == 'admin' &&
+                    if (userControler.text == 'admin' &&
                         passwordControler.text == 'admin') {
-                      Navigator.of(context).pushNamed(HomePage.tag);
+                      //Navigator.of(context).pushNamed(HomePage.tag);
+                      Navigator.of(context).pushNamed(DashBoard.tag);
                     } else {
                       Scaffold.of(context).showSnackBar(new SnackBar(
-                        content: new Text("Email id and Password is incorrect."),
+                        content:
+                            new Text("Username and password is incorrect."),
                       ));
                     }
                   },
@@ -74,13 +80,18 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ));
 
-    final forgotLabel = FlatButton(
-      child: Text(
-        'Forgot password?',
-        style: TextStyle(color: Colors.black54),
-      ),
-      onPressed: () {},
-    );
+    final forgotLabel = Builder(
+        builder: (context) => FlatButton(
+              child: Text(
+                'Forgot password?',
+                style: TextStyle(color: Colors.black54),
+              ),
+              onPressed: () {
+                Scaffold.of(context).showSnackBar(new SnackBar(
+                  content: new Text("Feature is under process."),
+                ));
+              },
+            ));
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -92,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     logo,
                     SizedBox(height: 48.0),
-                    email,
+                    user,
                     SizedBox(height: 8.0),
                     password,
                     SizedBox(height: 24.0),
